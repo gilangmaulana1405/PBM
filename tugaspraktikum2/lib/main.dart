@@ -27,7 +27,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-// Tugas Ganti Nama
+
 // class _MyHomePageState extends State<MyHomePage> {
 //   bool kondisi = true;
 

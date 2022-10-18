@@ -90,8 +90,42 @@ class MyApps extends StatelessWidget {
         //         }))
 
         // ListView Generate
+        // home: Scaffold(
+        //     appBar: AppBar(title: Text('List View Generate')),
+        //     body: ListView(children: angka))
+
+        // List Tile
+        // home: Scaffold(
+        //     appBar: AppBar(title: Text('List Tile')),
+        //     body: ListView(
+        //       children: [
+        //         ListTile(
+        //           contentPadding: EdgeInsets.all(10),
+        //           title: Text('Gilang Maulana'),
+        //           subtitle: Text('This is subtitle'),
+        //           leading: CircleAvatar(),
+        //           trailing: Text('10.00 PM'),
+        //           // tileColor: Colors.green),
+        //           // dense: true
+        //         ),
+        //         Divider(color: Colors.black),
+        //         ListTile(
+        //             title: Text('Gilang Maulana'),
+        //             subtitle: Text('This is subtitle'),
+        //             leading: CircleAvatar(),
+        //             trailing: Text('10.00 PM')),
+        //         Divider(color: Colors.black),
+        //         ListTile(
+        //             title: Text('Gilang Maulana'),
+        //             subtitle: Text('This is subtitle'),
+        //             leading: CircleAvatar(),
+        //             trailing: Text('10.00 PM'))
+        //       ],
+        //     )
+        //     )
+
         home: Scaffold(
-            appBar: AppBar(title: Text('List View Generate')),
-            body: ListView(children: angka)));
+            appBar: AppBar(title: Text('Images')),
+            body: Center(child: Image.asset('images/unsika.png'))));
   }
 }
