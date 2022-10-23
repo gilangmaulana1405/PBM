@@ -21,8 +21,8 @@ class DetailPage extends StatelessWidget {
       SizedBox(height: 16),
       Container(
           padding: EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 16,
+            horizontal: 20,
+            vertical: 20,
           ),
           child: Row(
             children: [
@@ -52,7 +52,8 @@ class DetailPage extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: Text('back'))
+          child: Text('back'),
+          style: ElevatedButton.styleFrom(primary: Color(0xff38EA2A)))
     ])));
   }
 }
