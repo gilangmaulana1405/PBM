@@ -14,61 +14,69 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
             title: Text('Home Page'), backgroundColor: Color(0xff38EA2A)),
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: 16),
-              Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 16,
-                  ),
-                  decoration: BoxDecoration(
-                      color: Color(0xff38EA2A),
-                      borderRadius: BorderRadius.circular(16)),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Image.asset('assets/chef_woman.png',
-                            width: 90, height: 100),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: 200,
-                              child: Text('How to make delicous food?',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white)),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                SizedBox(height: 16),
+                Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 16,
+                    ),
+                    decoration: BoxDecoration(
+                        color: Color(0xff38EA2A),
+                        borderRadius: BorderRadius.circular(16)),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Image.asset('assets/chef_woman.png',
+                              width: 90, height: 100),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: 200,
+                                child: Text('How to make delicous food?',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white)),
+                              ),
+                            ],
+                          )
+                        ])),
+                SizedBox(height: 16),
+                SizedBox(
+                  height: 1000,
+                  child: ListView.builder(
+                      itemCount: recipeList.length,
+                      itemBuilder: (context, index) {
+                        final item = recipeList[index];
+                        return ListTile(
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(width: 1),
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                          ],
-                        )
-                      ])),
-              SizedBox(height: 16),
-              SizedBox(
-                height: 1000,
-                child: ListView.builder(
-                    itemCount: recipeList.length,
-                    itemBuilder: (context, index) {
-                      final item = recipeList[index];
-                      return ListTile(
-                          title: Text(item.title),
-                          subtitle: Text(item.description),
-                          trailing: Text("${item.rating}"),
-                          leading: Container(
-                            width: 100,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(item.gambar))),
-                          ),
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DetailPage(recipe: item),
-                              )));
-                    }),
-              )
-            ],
+                            title: Text(item.title),
+                            subtitle: Text(item.description),
+                            trailing: Text("${item.rating}"),
+                            leading: Container(
+                              width: 100,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(item.gambar))),
+                            ),
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      DetailPage(recipe: item),
+                                )));
+                      }),
+                )
+              ],
+            ),
           ),
         ));
   }
