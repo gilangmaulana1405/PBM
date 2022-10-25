@@ -24,22 +24,24 @@ class DetailPage extends StatelessWidget {
               horizontal: 20,
               vertical: 20,
             ),
-            child: Row(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [Text("Rating : ${recipe.rating}")],
-                ),
-                SizedBox(width: 100),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(recipe.title,
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold))
-                  ],
-                ),
-              ],
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 16,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                      child: Text("Rating : ${recipe.rating}"),
+                      padding: EdgeInsets.all(10)),
+                  Container(
+                      child: Text(recipe.title,
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold)),
+                      padding: EdgeInsets.all(10)),
+                ],
+              ),
             )),
         Container(
             padding: EdgeInsets.symmetric(horizontal: 50, vertical: 16),

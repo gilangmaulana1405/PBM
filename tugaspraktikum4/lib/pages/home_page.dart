@@ -53,28 +53,32 @@ class HomePage extends StatelessWidget {
                       itemCount: recipeList.length,
                       itemBuilder: (context, index) {
                         final item = recipeList[index];
-                        return ListTile(
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(width: 1),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            title: Text(item.title),
-                            subtitle: Text(item.description),
-                            trailing: Text("${item.rating}"),
-                            leading: Container(
-                              width: 100,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(item.gambar))),
-                            ),
-                            onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      DetailPage(recipe: item),
-                                )));
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          child: ListTile(
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(width: 1),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              title: Text(item.title),
+                              subtitle: Text(item.description),
+                              trailing: Text("${item.rating}"),
+                              leading: Container(
+                                width: 100,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(item.gambar))),
+                              ),
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        DetailPage(recipe: item),
+                                  ))),
+                        );
                       }),
-                )
+                ),
+                SizedBox(height: 16)
               ],
             ),
           ),
