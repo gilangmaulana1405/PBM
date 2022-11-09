@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: Text('Home Page'), backgroundColor: Color(0xff38EA2A)),
+            title: Text('Home Page'), backgroundColor: Color(0xff5D51A2)),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
                       vertical: 16,
                     ),
                     decoration: BoxDecoration(
-                        color: Color(0xff38EA2A),
+                        color: Color(0xff5D51A2),
                         borderRadius: BorderRadius.circular(16)),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -83,5 +83,6 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ));
+
   }
 }
