@@ -1,20 +1,23 @@
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/material/bottom_navigation_bar.dart';
-import 'package:flutter/material.dart';
+// ignore_for_file: no_logic_in_create_state, prefer_const_constructors, unnecessary_new, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, duplicate_ignore, prefer_interpolation_to_compose_strings, avoid_unnecessary_containers, must_be_immutable, unused_field
 
-import 'package:tastee_restaurant/model/tastee_model.dart';
+import 'package:flutter/material.dart';
+import 'package:tastee/models/tastee_model.dart';
+import 'package:tastee/models/user_active.dart';
+import 'package:tastee/pages/home_page.dart';
+import 'package:tastee/pages/profile_tastee.dart';
+
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({Key? key, required this.tasteeModel}) : super(key: key);
-
+  DetailPage({Key? key, required this.tasteeModel, required this.user}) : super(key: key);
+  userActive user;
   final TasteeModel tasteeModel;
   @override
-  State<DetailPage> createState() => _DetailPageState(tasteeModel: tasteeModel);
+  State<DetailPage> createState() => _DetailPageState(tasteeModel: tasteeModel, user: user);
 }
 
 class _DetailPageState extends State<DetailPage> {
-  _DetailPageState({required this.tasteeModel});
+  _DetailPageState({required this.tasteeModel, required this.user});
+  userActive user;
   final TasteeModel tasteeModel;
   int _counter = 0;
 
@@ -26,55 +29,38 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
+
+
+int selectedIndex = 1;
+    TextStyle optionStyle = TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
+    // ignore: unused_local_variable
+    List<Widget> widgetOptions = <Widget>[
+      Text(
+        'Index 0: Home',
+        style: optionStyle,
+      ),
+      Text(
+        'Index 1: Settings',
+        style: optionStyle,
+      ),
+      Text(
+        'Index 2: Favorites',
+        style: optionStyle,
+      ),
+    ];
+    void onItemTapped(int index) {
+      if(index == 0){
+        Navigator.push(context, MaterialPageRoute(builder:(context) => HomePage(user: user), ));
+      }else if(index == 1){
+        // Navigator.push(context, MaterialPageRoute(builder:(context) => , ));
+      }else if(index == 2){
+        Navigator.push(context, MaterialPageRoute(builder:(context) => profilePage(user: user,), ));
+      }
+    }
+
+
     return Scaffold(
-        backgroundColor: Color(0xff0a1931),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Color.fromARGB(22, 49, 118, 230),
-          iconSize: 24,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home_outlined,
-                color: Colors.white,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.apps_rounded,
-                color: Colors.white,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Stack(
-                children: [
-                  new Icon(Icons.notifications_none_outlined,
-                      size: 25.5, color: Colors.white),
-                  Positioned(
-                    top: -1.0,
-                    right: -1.0,
-                    child: Stack(
-                      children: [
-                        Text('$_counter', style: TextStyle(color: Colors.white))
-                        // Icon(Icons.brightness_1, color: Colors.red, size: 12.0),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person_outline,
-                color: Colors.white,
-              ),
-              label: '',
-            ),
-          ],
-        ),
+        backgroundColor: Color(0xff0a1931),        
         appBar: AppBar(
             title: Text('Detail Page'),
             backgroundColor: Color(0xFFfc4a1a),
@@ -203,6 +189,50 @@ class _DetailPageState extends State<DetailPage> {
               ])
             ],
           )),
-        ));
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Color(0xFFf7b733),
+        iconSize: 24,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home_outlined,
+              color: Colors.white,
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Stack(
+              children: [
+                new Icon(Icons.notifications_none_outlined,
+                    size: 25.5, color: Colors.white),
+                Positioned(
+                  top: -1.0,
+                  right: -1.0,
+                  child: Stack(
+                    children: [
+                      Text('$_counter', style: TextStyle(color: Colors.white))
+                      // Icon(Icons.brightness_1, color: Colors.red, size: 12.0),
+                    ],
+                  ),
+                )
+              ],
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person_outline,
+              color: Colors.white,
+            ),
+            label: '',
+          ),
+        ],
+        currentIndex: selectedIndex,
+        selectedItemColor: Colors.deepPurpleAccent[200],
+        onTap: onItemTapped,
+      ),
+    );
   }
 }

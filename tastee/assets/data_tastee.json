@@ -1,0 +1,38 @@
+{
+    "tastee": [{
+            "id": 1,
+            "title": "mie ramen",
+            "description": "lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "price": "19000",
+            "image": "assets/mie_ramen.png"
+        },
+        {
+            "id": 2,
+            "title": "milkshake",
+            "description": "lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "price": "15000",
+            "image": "assets/milkshake.png"
+        },
+        {
+            "id": 2,
+            "title": "milkshake",
+            "description": "lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "price": "15000",
+            "image": "assets/milkshake.png"
+        },
+        {
+            "id": 2,
+            "title": "milkshake",
+            "description": "lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "price": "15000",
+            "image": "assets/milkshake.png"
+        },
+        {
+            "id": 3,
+            "title": "cupcake",
+            "description": "lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "price": "10000",
+            "image": "assets/cupcake.png"
+        }
+    ]
+}

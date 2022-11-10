@@ -1,58 +1,62 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_import
-
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+// ignore_for_file: prefer_const_constructors, unnecessary_import, prefer_const_literals_to_create_immutables, duplicate_ignore
 
 import 'package:flutter/material.dart';
-import 'package:tastee_restaurant/model/tastee_model.dart';
-import 'package:tastee_restaurant/pages/detail_page.dart';
+import 'package:tastee/models/tastee_model.dart';
+import 'package:tastee/models/user_active.dart';
+import 'package:tastee/pages/detail_page.dart';
+import 'package:tastee/pages/profile_tastee.dart';
 
 // import 'package:http/http.dart' as http;
 // import 'dart:async';
 // import 'dart:convert';
 
+// ignore: must_be_immutable
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key, required this.user});
+  userActive user;
 
   @override
   Widget build(BuildContext context) {
+    int selectedIndex = 1;
+    TextStyle optionStyle =
+        TextStyle(fontSize: 10, fontWeight: FontWeight.bold);
+    // ignore: unused_local_variable
+    List<Widget> widgetOptions = <Widget>[
+      Text(
+        'Index 0: Home',
+        style: optionStyle,
+      ),
+      Text(
+        'Index 1: Settings',
+        style: optionStyle,
+      ),
+      Text(
+        'Index 2: Favorites',
+        style: optionStyle,
+      ),
+    ];
+    void onItemTapped(int index) {
+      if (index == 0) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomePage(user: user),
+            ));
+      } else if (index == 1) {
+        // Navigator.push(context, MaterialPageRoute(builder:(context) => , ));
+      } else if (index == 2) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => profilePage(
+                user: user,
+              ),
+            ));
+      }
+    }
+
     return Scaffold(
       backgroundColor: Color(0xff0a1931),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Color.fromARGB(22, 49, 118, 230),
-        iconSize: 24,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_outlined,
-              color: Colors.white,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.apps_rounded,
-              color: Colors.white,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.notifications_none_outlined,
-              color: Colors.white,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_outline,
-              color: Colors.white,
-            ),
-            label: '',
-          ),
-        ],
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -71,18 +75,28 @@ class HomePage extends StatelessWidget {
                             SizedBox(
                               height: 4,
                             ),
-                            Text('Gilang Maulana',
+                            Text(user.username,
                                 style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white)),
                           ]),
-                      CircleAvatar(
-                          backgroundColor: Colors.grey,
-                          radius: 30,
-                          child: CircleAvatar(
-                              radius: 28,
-                              backgroundImage: AssetImage('assets/squid.jpg')))
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      profilePage(user: user)));
+                        },
+                        child: CircleAvatar(
+                            backgroundColor: Colors.grey,
+                            radius: 30,
+                            child: CircleAvatar(
+                                radius: 28,
+                                backgroundImage:
+                                    AssetImage('assets/squid.jpg'))),
+                      )
                     ]),
                 SizedBox(height: 16),
                 Container(
@@ -190,63 +204,86 @@ class HomePage extends StatelessWidget {
                     builder: (context, snapshot) {
                       List<TasteeModel> tastee = parse(snapshot.data);
 
-                      return SizedBox(
-                        height: 1000,
-                        child: ListView.builder(
-                            itemCount: tastee.length,
-                            itemBuilder: (context, index) {
-                              return SingleChildScrollView(
-                                scrollDirection: Axis.vertical,
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: ListTile(
-                                          shape: RoundedRectangleBorder(
-                                            side: BorderSide(
-                                                width: 1.5,
-                                                color: Colors.white),
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          title: Text(tastee[index].title,
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18)),
-                                          subtitle: Text(
-                                              tastee[index].description,
-                                              style: TextStyle(
-                                                  color: Colors.white70)),
-                                          trailing: Text(
-                                              "Rp. ${tastee[index].price}",
-                                              style: TextStyle(
-                                                  color: Colors.white)),
-                                          leading: Container(
-                                              width: 80,
-                                              decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                      image: AssetImage(
-                                                          tastee[index]
-                                                              .image)))),
-                                          onTap: () => Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    DetailPage(
-                                                        tasteeModel:
-                                                            tastee[index]),
-                                              ))),
-                                    ),
-                                  ],
+                      return ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: tastee.length,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ListTile(
+                                      shape: RoundedRectangleBorder(
+                                        side: BorderSide(
+                                            width: 1.5, color: Colors.white),
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      title: Text(tastee[index].title,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18)),
+                                      subtitle: Text(tastee[index].description,
+                                          style:
+                                              TextStyle(color: Colors.white70)),
+                                      trailing: Text(
+                                          "Rp. ${tastee[index].price}",
+                                          style:
+                                              TextStyle(color: Colors.white)),
+                                      leading: Container(
+                                          width: 80,
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: AssetImage(
+                                                      tastee[index].image)))),
+                                      onTap: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => DetailPage(
+                                                    tasteeModel: tastee[index],
+                                                    user: user,
+                                                  )))),
                                 ),
-                              );
-                            }),
-                      );
+                              ],
+                            );
+                          });
                     }),
                 SizedBox(height: 16)
               ])),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Color(0xFFf7b733),
+        iconSize: 24,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home_outlined,
+              color: Colors.white,
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.notifications_none_outlined,
+              color: Colors.white,
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person_outline,
+              color: Colors.white,
+            ),
+            label: '',
+          ),
+        ],
+        currentIndex: selectedIndex,
+        selectedItemColor: Colors.deepPurpleAccent[200],
+        onTap: onItemTapped,
       ),
     );
   }
