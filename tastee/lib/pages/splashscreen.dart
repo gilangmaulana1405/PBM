@@ -3,7 +3,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:tastee/pages/register_tastee.dart';
+import 'package:tastee/pages/login_tastee.dart';
 
 class splashScreen extends StatefulWidget {
   const splashScreen({super.key});
@@ -13,16 +13,13 @@ class splashScreen extends StatefulWidget {
 }
 
 class _splashScreenState extends State<splashScreen> {
+
   @override
-  void initState() {
+  void initState(){
     super.initState();
     // ignore: prefer_const_constructors
     Timer(Duration(seconds: 3), () {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => TasteeRegister(),
-          ));
+      Navigator.push(context, MaterialPageRoute(builder:(context) => TasteeLogin(), ));
     });
   }
 
@@ -41,23 +38,9 @@ class _splashScreenState extends State<splashScreen> {
             Image.asset('assets/splash_img.png'),
             Column(
               children: [
-                Text(
-                  'SUPER',
-                  style: TextStyle(
-                      fontSize: 35,
-                      color: Colors.grey[300],
-                      fontWeight: FontWeight.bold),
-                ),
-                Text('DELICIOUS',
-                    style: TextStyle(
-                        fontSize: 35,
-                        color: Colors.grey[300],
-                        fontWeight: FontWeight.bold)),
-                Text('FOOD',
-                    style: TextStyle(
-                        fontSize: 35,
-                        color: Colors.grey[300],
-                        fontWeight: FontWeight.bold)),
+                Text('SUPER', style: TextStyle(fontSize: 35, color: Colors.grey[300], fontWeight: FontWeight.bold),),
+                Text('DELICIOUS', style: TextStyle(fontSize: 35, color: Colors.grey[300], fontWeight: FontWeight.bold)),
+                Text('FOOD', style: TextStyle(fontSize: 35, color: Colors.grey[300], fontWeight: FontWeight.bold)),
               ],
             ),
           ],

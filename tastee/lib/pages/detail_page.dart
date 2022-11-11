@@ -5,6 +5,7 @@ import 'package:tastee/models/tastee_model.dart';
 import 'package:tastee/models/user_active.dart';
 import 'package:tastee/pages/home_page.dart';
 import 'package:tastee/pages/profile_tastee.dart';
+import 'package:tastee/pages/verif_page.dart';
 
 
 class DetailPage extends StatefulWidget {
@@ -170,6 +171,13 @@ int selectedIndex = 1;
                       ),
                       SizedBox(width: 20),
                       InkWell(
+                        onTap: () {
+                          var price = int.parse(tasteeModel.price);
+                          // ignore: unnecessary_type_check
+                          assert(price is int);
+                          price = price * _counter;
+                          Navigator.push(context, MaterialPageRoute(builder:(context) => verifPage(user: user, price: price, counter: _counter,), ));
+                        },
                           child: Container(
                               height: 50,
                               width: 200,
